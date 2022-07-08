@@ -13,11 +13,14 @@
 
 <body>
     <div class="calculadora">
-        <div class="resultado">2x2</div>
+        <div class="contenedor-res">
+            <p class="operacion"></p>
+            <p class="resultado"></p>
+        </div>
         <div class="botones">
             <a class="boton"></a>
-            <a class="boton"></a>
-            <a class="boton"></a>
+            <a class="boton">CE</a>
+            <a class="boton">del</a>
             <a class="boton">/</a>
             <a class="boton">7</a>
             <a class="boton">8</a>
