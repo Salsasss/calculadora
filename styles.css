@@ -5,6 +5,7 @@ html {
 }
 
 body {
+    background-color: #97d4e5;
     font-family: 'Bebas Neue', cursive;
     font-size: 1.6rem;
     line-height: 2;
@@ -19,21 +20,33 @@ p {
     margin: 0;
 }
 
+.contenedor {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .calculadora {
     background-color: #0078b7;
     width: 25rem;
-    margin: 0 auto;
-    margin-top: 2rem;
     padding: 1.5rem;
     font-weight: bold;
     border: 2px solid black;
     border-radius: 5px;
-    box-shadow: 0px 0px 15px 2px;
+    box-shadow: 0px 0px 12px black;
+}
+
+.calculadora:hover {
+    transition: all 0.2s;
+    transform: scale(1.05);
+    box-shadow: 0px 0px 25px black;
 }
 
 .contenedor-res {
     background-color: #cce9f3;
-    height: 6.5rem;
+    height: 7.5rem;
     margin-bottom: 2.5rem;
     padding: .5rem 1rem;
     border: 2px solid black;
@@ -46,6 +59,11 @@ p {
     height: 2rem;
     font-size: 1.5rem;
     font-weight: bolder;
+}
+
+.resultado {
+    height: fit-content;
+    font-size: 3rem;
 }
 
 .botones {
@@ -68,7 +86,8 @@ p {
 }
 
 .boton:hover {
-    background-color: brown;
+    background-color: #3bc4ea;
+    transform: scale(1.05);
     cursor: pointer;
 }
 
