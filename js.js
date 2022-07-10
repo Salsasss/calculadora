@@ -10,6 +10,7 @@ let limpiarP = false;
 botones.forEach(boton => {
     boton.addEventListener("click", () => {
         let val = boton.id;
+
         if (limpiarP) {
             limpiarPantalla();
             limpiarP = false;
@@ -18,7 +19,7 @@ botones.forEach(boton => {
         switch (val) {
             case 'igual':
                 if (resultado.textContent.length > 0) {
-                    ope = operacion.id.substring(operacion.textContent.length - 2, operacion.textContent.length).trim();
+                    ope = operacion.textContent.substring(operacion.textContent.length - 2, operacion.textContent.length).trim();
                     numero2 = parseInt(resultado.textContent);
                     operacion.textContent += " " + numero2 + " = ";
                     resultado.textContent = calcular(numero1, numero2, ope);
@@ -29,13 +30,21 @@ botones.forEach(boton => {
             case 'resta':
             case 'multi':
             case 'divi':
+                ope = operacion.textContent.substring(operacion.textContent.length - 2, operacion.textContent.length).trim();
+                if (ope != '+' && ope != '-' && ope != 'x' && ope != '÷' && resultado.textContent.length > 0) {
+                    numero1 = parseInt(resultado.textContent);
+                    cargarNumero(resultado.textContent, boton.textContent);
+                    resultado.textContent = "";
+                }
+                break;
             case 'cuadrado':
             case 'cubo':
-                ope = operacion.id.substring(operacion.textContent.length - 2, operacion.textContent.length).trim();
-                if (ope != 'suma' && ope != 'resta' && ope != 'multi' && ope != 'divi' && ope != 'cuadrado' && ope != 'cubo' && resultado.textContent.length > 0) {
+            case 'raiz':
+                if (resultado.textContent.length > 0) {
                     numero1 = parseInt(resultado.textContent);
-                    cargarNumero(resultado.textContent, val);
-                    resultado.textContent = "";
+                    cargarUnNumero(numero1, val);
+                    resultado.textContent = calcularUnNumero(numero1, val);
+                    limpiarP = true;
                 }
                 break;
             case 'ce':
@@ -45,7 +54,7 @@ botones.forEach(boton => {
                 resultado.textContent = resultado.textContent.substring(0, resultado.textContent.length - 1);
                 break;
             default:
-                resultado.textContent += val;
+                resultado.textContent += boton.textContent;
         }
     });
 });
@@ -56,18 +65,43 @@ function limpiarPantalla() {
 }
 
 function cargarNumero(valor, simbolo) {
-    operacion.textContent += " " + valor + " " + simbolo;
+    operacion.textContent += valor + " " + simbolo;
+}
+
+function cargarUnNumero(valor, simbolo) {
+    switch (simbolo) {
+        case 'cuadrado':
+            operacion.textContent = valor + "² =";
+            break;
+        case 'cubo':
+            operacion.textContent = valor + "³ =";
+            break;
+        case 'raiz':
+            operacion.textContent = "√" + valor + " = ";
+            break;
+    }
 }
 
 function calcular(numero1, numero2, ope) {
     switch (ope) {
-        case 'suma':
+        case '+':
             return numero1 + numero2;
-        case 'resta':
+        case '-':
             return numero1 - numero2;
-        case 'multi':
+        case 'x':
             return numero1 * numero2;
-        case 'divi':
+        case '÷':
             return numero1 / numero2;
+    }
+}
+
+function calcularUnNumero(numero, ope) {
+    switch (ope) {
+        case 'cuadrado':
+            return Math.pow(numero1, 2);
+        case 'cubo':
+            return Math.pow(numero1, 3);
+        case 'raiz':
+            return Math.sqrt(numero1);
     }
 }
